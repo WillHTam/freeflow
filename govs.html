@@ -7,20 +7,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Jquery & Algolia -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.17.0/algoliasearch.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
-
   <!-- Javascript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="javascript/gov.js"></script>
   <script src="javascript/user_auth.js"></script>
   <script src="javascript/about.js"></script>
-
-  <!-- Jquery & Algolia -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/algoliasearch/3.17.0/algoliasearch.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/autocomplete.js/0/autocomplete.min.js"></script>
-
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -44,204 +35,33 @@
 
 <body>
   <div class="desk-flex">
-    <div class="side-nav full">
-
-      <ul>
-        <li><a href="index.html"><img class="toppad full-logo" src="img/logo.svg"/></a></li>
-
-        <a href="cospaces.html"><li class="grey hover-nav  align-nav">Coworking Spaces</li></a>
-
-        <a class="hover-nav" href="incubators.html"><li class="grey hover-nav align-nav">Incubators &amp; Accelerators</li></a>
-
-        <a href="events.html"><li class="grey hover-nav align-nav">Events &amp; Hackathons</li></a>
-
-        <a href="govs.html"><li class="grey hover-nav align-nav">Government Programs</li></a>
-
-        <a href="investors.html"><li class="grey hover-nav align-nav">Investors</li></a>
-
-        <li class="align-nav2">
-          <button id="signup">
-            <a class="topuser-btn" href="register.html">Sign Up</a>
-          </button>
-
-          <button id ="login">
-            <a class="topuser-btn" href="login.html">Log In</a>
-          </button>
-
-          <button id="logout">
-            Logout
-          </button>
-        </li>
-      </ul>
-
-      <!-- DESKVIEW BUTTON FOR ADD ENTRY -->
-      <div class="add full" data-toggle="modal" data-target="#addModal">
-        <a href="#">
-        <h5><span class="glyphicon glyphicon-plus-sign red" aria-hidden="true"></span> New Entry</h5>
-        </a>
-      </div>
-    </div><!--side-nav-->
-
     <div class="main-content">
-      <div class="container center">
-        
 
       <div id="header">
-        <a href="index.html"><img class="toppad full-logo" src="img/logo.svg"/></a>
-        <h4 class="title darkgrey">Govt Programmes</h4>
+        <h4 class="title darkgrey">Choose Your Coffee</h4>
         <p class="tagline condense">Local organisations and resources.</p>
-
-        <!-- ===== START SEARCHBAR =====-->
-        <div class="search">
-
-          <form class="search-form search-full">
-            <div class="has-feedback">
-              <input type="text" class="form-control widekern red up" name="search" id="search-input" placeholder="Search Government Programmes"><span class="glyphicon glyphicon-search form-control-feedback"></span>
-            </div>
-          <div id="search-enter"></div>
-        </form>
-        </div>
-        <div class="results" id="search-result">
-          <!-- <ul id="users"></ul> -->
-        </div>
-        <!-- ===== END SEARCHBAR =====-->
       </div><!--header-->
 
-      </div><!--container-->
-
-
-
-
         <!-- ===== SHOW ALL GOVT PROGRAMS ===== -->
-        <div id="gov" class="info"></div>
-
-        <!-- ===== SHOW INDIVIDUAL GOVT PROGRAMS ===== -->
-        <div id='gov-show'>
+        <div id="gov" class="info">
+          <div class="one-item">
+            <div class="item-blurb norm">
+              <!-- <img class="logo-all img-circle full-avatar" src="' + datum.logo + '"/> -->
+              <img src="" />
+              <h6 class="name-all">Latte</h6>
+            </div>
+          </div>
         </div>
 
-
-        <!-- ===== ADD GOVT PROGRAM ===== -->
-        <!-- Modal -->
-        <div class="modal fade" id="addModal" role="dialog">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h5 class="modal-title toppad center">Add a new entry</h5>
-              </div>
-
-              <div class="modal-body">
-                <form id="add-gov-form">
-                  <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" name="name">
-                  </div>
-                  <div class="form-group">
-                    <label>Address</label>
-                    <input type="text" class="form-control" name="address">
-                  </div>
-                  <div class="form-group">
-                    <label>Description</label>
-                    <textarea type="text" class="form-control" rows="3" id="description" name="description"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label>Website</label>
-                    <input type="text" class="form-control" name="website">
-                  </div>
-                  <div class="form-group">
-                    <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Logo Image URL</label>
-                    <input type="text" class="form-control" name="url">
-                  </div>
-                  <div class="form-group">
-                    <label><span class="glyphicon glyphicon-camera" aria-hidden="true"></span>Additional Image URL</label>
-                    <input type="text" class="form-control" name="url">
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-md formbutton"><h5>Submit</h5></button>
-                  </div>
-                </form>
-              </div><!--modal-body-->
-            </div><!--modal-content-->
-          </div><!--modal-dialog-->
-        </div><!--modal-->
-
-
-      <!-- ===== EDIT GOVT PROGRAM ===== -->
-      <!-- Modal -->
-      <div class="modal fade" id="editModal" role="dialog">
-          <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">
-                  &times;
-                </button>
-                <h4 class="modal-title center toppad">Edit Details</h4>
-              </div>
-              <div class="modal-body">
-                <form id="edit-gov-form">
-                  <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" name="name">
-                  </div>
-                  <div class="form-group">
-                    <label>Address</label>
-                    <input type="text" class="form-control" name="address">
-                  </div>
-                  <div class="form-group">
-                    <label>Description</label>
-                    <textarea type="text" class="form-control" rows="3" id="description" name="description"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label>Website</label>
-                    <input type="text" class="form-control" name="website">
-                  </div>
-
-                  <div class="form-group">
-                    <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Logo Image URL</label>
-                    <input type="text" class="form-control" name="url">
-                  </div>
-
-                  <div class="form-group">
-                    <label>
-                      <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>Header Image URL
-                    </label>
-                    <input type="text" class="form-control" name="url">
-                  </div>
-
-                  <br>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-md formbutton">
-                      <h5>Submit</h5>
-                    </button>
-                  </div>
-
-                </form>
-
-              </div><!-- modal-body -->
-            </div><!-- modal-content -->
-          </div><!-- modal-dialog modal-lg -->
-        </div><!-- modal-fade -->
-
     </div><!--main-content-->
-  </div> <!-- desk-flex -->
+  </div><!-- desk-flex -->
 
   <!-- MOBILE BUTTON FOR ADD ENTRY -->
   <div class="add mob" data-toggle="modal" data-target="#addModal">
     <a href="#">
-    <h5><span class="glyphicon glyphicon-plus-sign red" aria-hidden="true"></span> New Entry</h5>
+    <h5><span class="glyphicon glyphicon-plus-sign red" aria-hidden="true"></span> Get Coffee</h5>
     </a>
   </div><!--add btn-->
-
-  <!-- <div class="navfooter"> -->
-    <!-- <ul class="navfooter">
-      <a src="index.html" href="index.html"><li class="iconbtn home"></li></a>
-      <a src="cospaces.html" href="cospaces.html"><li class="iconbtn cospace"></li></a>
-      <a src="incubators.html" href="incubators.html"><li class="iconbtn inc"></li></a>
-      <a src="events.html" href="events.html"><li class="iconbtn event"></li></a>
-      <a src="programs.html" href="govs.html"><li class="iconbtn govt"></li></a>
-    </ul> -->
 
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   </body>

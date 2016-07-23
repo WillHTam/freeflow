@@ -15,7 +15,6 @@ $(function () {
     getData()
   }
   // listen for the form login
-  var search
   var newid
 
   // Show individual item
@@ -222,102 +221,4 @@ function initMap () {
   })
 
   createMarkers(map)
-}
-
-// SEARCH FUNCTION ALGOLIA
-$(document).ready(function () {
-  var client = algoliasearch('MSZ2UYVAZJ', '78510e196a674bb800715809fb0ad104')
-  var index = client.initIndex('startup_index')
-  var $input = $('input')
-  autocomplete('#search-input', {hint: false}, [
-    {
-      source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
-      displayKey: 'name',
-      templates: {
-        suggestion: function (suggestion) {
-          return suggestion._highlightResult.name.value
-        }
-      }
-    }
-  ]).on('autocomplete:selected', function (event, suggestion, dataset) {
-    var id
-    var search = suggestion
-    var confirmsearch = search._id
-    var searchmodel = search.model
-    if (searchmodel === 'co-working-spaces') {
-      id = '#cospace'
-      window.location.href = 'cospaces.html?id=' + confirmsearch
-    }
-    if (searchmodel === 'investors') {
-      id = '#investor'
-      window.location.href = 'investors.html?id=' + confirmsearch
-    }
-    if (searchmodel === 'incubator-accelerators') {
-      id = '#incubator'
-      window.location.href = 'incubators.html?id=' + confirmsearch
-    }
-    if (searchmodel === 'government-programs') {
-      id = '#gov'
-      window.location.href = 'govs.html?id=' + confirmsearch
-    }
-    console.log(search.model)
-    showDetail(confirmsearch, searchmodel, id)
-  })
-})
-
-function searchCallback (err, content) {
-  if (err) {
-    console.error(err)
-    return
-  }
-  var $users = $('#users')
-  $users.empty()
-  for (var i = 0; i < content.hits.length; i++) {
-    $users.append('<li>' + content.hits[i].name + '</li>')
-  }
-}
-
-function showDetails (newid, route, id) {
-  $.get(serverURL + route + '/' + newid)
-    .done(function (data) {
-      console.log(route)
-      $('#header').hide()
-      $(id).hide()
-      $('#map').hide()
-      $('.map-btn').addClass('hide')
-      $('.add').addClass('hide')
-      $(id + '-show').html('')
-      if ((data.government_program.logo === '') || (data.government_program.logo === undefined) || (data.government_program.logo === null)) {
-        data.government_program.logo = 'img/default-logo.svg'
-        console.log(data.government_program.logo)
-      }
-      if ((data.government_program.image === '') || (data.government_program.image === undefined) || (data.government_program.image === null)) {
-        data.government_program.image = 'img/default-img.svg'
-        console.log(data.government_program.image)
-      }
-      $(id + '-show').append(
-        '<div class="close-btn"><a href="govs.html"><img src="img/x-light.svg"></a></div>' +
-        '<div class="center toppad">' +
-        '<div id=' + data.government_program._id + '>' +
-        '<img class="logo-all img-circle" src="' + data.government_program.logo + '"/>' +
-        '<h4 class="toppad">' + data.government_program.name + '</h4>' +
-        '<div class="norm">' +
-        '<p class="hyphenate"><a href="' + data.government_program.website + '">' + data.government_program.website + '</a></p>' +
-        '<p class="toppad address">' + data.government_program.address + '</p>' +
-        '<p class="grey 400 details">' + data.government_program.description + '</p>' +
-        '<img class="h-image " src="' + data.government_program.image + '"/>' +
-        '<div class="edit-del toppad">' +
-        '<h5 class="btn-md" data-toggle="modal" data-target="#editModal">' +
-        '<a href="#">' +
-        '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>' +
-        '</h5>' +
-        '<h5 class="btn-md" type="submit" id="delete"><a href="#">' +
-        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>' +
-        '</h5>' +
-        '</div></div>'
-      )
-      $(id + '-show').show()
-      console.log(data.government_program.description)
-      console.log(data.government_program.image)
-    })
 }
