@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Startups.SG</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Javascript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="../javascript/gov.js"></script>
+  <script src="../javascript/user_auth.js"></script>
+  <script src="../javascript/about.js"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../style/style.css">
+
+  <!--- Favicon -->
+  <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="./manifest.json">
+
+  <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body>
+  <div class="desk-flex">
+    <div class="main-content">
+
+      <div id="header">
+        <h4 class="title darkgrey">Choose Your Coffee</h4>
+        <p class="tagline condense">Strangers' Reunion</p>
+      </div><!--header-->
+
+      <!-- ===== SHOW ALL GOVT PROGRAMS ===== -->
+      <div id="gov" class="info">
+        <div class="one-item">
+          <img class="logo-all full-avatar"src="../favicons/coffee-01.png" />
+          <div class="item-blurb norm">
+            <h6 class="name-all">Caffè Macciato</h6>
+            <p>1 Part Espresso, 1 Part Foamed Milk, Add Shaved Cooa</p>
+          </div>
+        </div>
+
+        <div class="one-item">
+          <img class="logo-all full-avatar"src="../favicons/coffee-02.png" />
+          <div class="item-blurb norm">
+            <h6 class="name-all">Espresso</h6>
+            <p>1 Shot Espresso, 0 Parts of Anything</p>
+          </div>
+        </div>
+
+        <div class="one-item">
+          <img class="logo-all full-avatar"src="../favicons/coffee-03.png" />
+          <div class="item-blurb norm">
+            <h6 class="name-all">Black Coffee</h6>
+            <p>1 Cup Coffee, 0 Parts of Anything</p>
+          </div>
+        </div>
+
+        <div class="one-item">
+          <img class="logo-all full-avatar"src="../favicons/coffee-04.png" />
+          <div class="item-blurb norm">
+            <h6 class="name-all">Americano</h6>
+            <p>1/3 Espresso, 2/3 Hot Water</p>
+          </div>
+        </div>
+
+        <div class="one-item">
+          <img class="logo-all full-avatar"src="../favicons/coffee-05.png" />
+          <div class="item-blurb norm">
+            <h6 class="name-all">Latte</h6>
+            <p>2/3 Coffee, 1/3 Steamed Milk, Top with Milk Foam</p>
+          </div>
+        </div>
+
+        <div class="one-item">
+          <img class="logo-all full-avatar"src="../favicons/coffee-06.png" />
+          <div class="item-blurb norm">
+            <h6 class="name-all">Cappuinno</h6>
+            <p>1 Part Espresso, 1 Part Hot Milk, Steamed Milk Foam</p>
+          </div>
+        </div>
+
+        <div class="one-item">
+          <img class="logo-all full-avatar"src="../favicons/coffee-07.png" />
+          <div class="item-blurb norm">
+            <h6 class="name-all">Iced Coffee</h6>
+            <p>Chilled Coffee, Served over Ice</p>
+          </div>
+        </div>
+
+        <div class="one-item">
+          <img class="logo-all full-avatar"src="../favicons/coffee-08.png" />
+          <div class="item-blurb norm">
+            <h6 class="name-all">Flat White</h6>
+            <p>1 Shot Espresso, Rest Steamed Milk</p>
+          </div>
+        </div>
+      </div>
+    </div><!--main-content-->
+  </div><!-- desk-flex -->
+
+  <!-- MOBILE BUTTON FOR ADD ENTRY -->
+  <div class="add mob" data-toggle="modal" data-target="#addModal">
+    <a href="#">
+      <h5><span class="glyphicon glyphicon-plus-sign red" aria-hidden="true"></span> Order</h5>
+    </a>
+  </div><!--add btn-->
+
+  <!-- Modal for Code -->
+  <div class="modal fade" id="addModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Strangers' Reunion</h4>
+        </div>
+
+        <div class="modal-body">
+          <form id="add-tldr-form">
+
+            <div class="form-group">
+              <label for="tldr">Get the code from your barista</label>
+              <input type="text" class="form-control" style="font-family: Roboto" placeholder="Add More Topics">
+            </div>
+            <br>
+
+            <div class="form-group" id="add-tldr-submit">
+              <button style="font-family: Roboto" class="btn btn-default"><a href="gif.html">Submit</a></button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- CART -->
+  <div class="cd-cart-container empty">
+    <a href="#0" class="cd-cart-trigger">
+        <ul class="count"> <!-- cart items count -->
+            <li>0</li>
+            <li>0</li>
+        </ul> <!-- .count -->
+    </a>
+
+    <div class="cd-cart">
+        <div class="wrapper">
+    </div>
+</div>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</body>
+</html>

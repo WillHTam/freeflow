@@ -1,224 +1,170 @@
-/* global $ google alert geocoder */
-var serverURL = 'http://startups-sg.herokuapp.com/'
+jQuery(document).ready(function($){
+	var cartWrapper = $('.cd-cart-container');
+	//product id - you don't need a counter in your real project but you can use your real product id
+	var productId = 0;
 
-$(function () {
-  $('#map').addClass('hide')
-  $.urlParam = function (name) {
-    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href)
-    if (results) return results[1]
-    return 0
-  }
-  var id = $.urlParam('id')
-  if (id) {
-    showDetails(id, window.localStorage['searchmodel'], window.localStorage['id'])
-  } else {
-    getData()
-  }
-  // listen for the form login
-  var newid
+	if( cartWrapper.length > 0 ) {
+		//store jQuery objects
+		var cartBody = cartWrapper.find('.body')
+		var cartList = cartBody.find('ul').eq(0);
+		var cartTotal = cartWrapper.find('.checkout').find('span');
+		var cartTrigger = cartWrapper.children('.cd-cart-trigger');
+		var cartCount = cartTrigger.children('.count')
+		var addToCartBtn = $('.one-item');
+		var undo = cartWrapper.find('.undo');
+		var undoTimeoutId;
 
-  // Show individual item
-  $(document).on('click', '#gov .one-item', function (event) {
-    newid = $(this).attr('id')
-    console.log(newid)
-    showDetail(newid)
-  })
-  $(document).on('click', '.one-map-item', function (event) {
-    var newid = $(this).attr('id')
-    console.log(newid)
-    showDetail(newid)
-  })
-  $(document).on('click', '#gov-show', function (event) {
-    $('#gov').show()
-    $('#gov-show').html('')
-  })
-  $('#add-gov-form').on('submit', function (event) {
-    event.preventDefault()
-    var formData = $(this).serialize()
-    addGov(formData)
-  })
-  $('#edit-gov-form').on('submit', function (event) {
-    event.preventDefault()
-    var formData = $(this).serialize()
-    editGov(formData, newid)
-  })
-  $(document).on('click', '#delete', function (event) {
-    event.preventDefault()
-    deleteGov(newid)
-  })
-})
+		//add product to cart
+		addToCartBtn.on('click', function(event){
+			event.preventDefault();
+			addToCart($(this));
+		});
 
-// $(document).on('click', '.map-btn', function (event) {
-//   console.log('map-btn clicked')
-//   $('#header').toggleClass('hide')
-//   $('#map').toggleClass('hide')
-// })
+		//open/close cart
+		cartTrigger.on('click', function(event){
+			event.preventDefault();
+			toggleCart();
+		});
 
-function showDetail (newid) {
-  $.get(serverURL + 'government-programs/' + newid)
-    .done(function (data) {
-      $('#header').hide()
-      $('#gov').hide()
-      $('#map').hide()
-      $('.map-btn').addClass('hide')
-      $('#gov-show').html('')
-      if ((data.government_program.logo === '') || (data.government_program.logo === undefined) || (data.government_program.logo === null)) {
-        data.government_program.logo = 'img/default-logo.svg'
-        console.log(data.government_program.logo)
-      }
-      if ((data.government_program.image === '') || (data.government_program.image === undefined) || (data.government_program.image === null)) {
-        data.government_program.image = 'img/default-img.svg'
-        console.log(data.government_program.image)
-      }
-      $('#gov-show').append(
-        '<div class="close-btn"><a href="govs.html"><img src="img/x-light.svg"></a></div>' +
-        '<div class="center toppad">' +
-        '<div id=' + data.government_program._id + '>' +
-        '<img class="logo-all img-circle" src="' + data.government_program.logo + '"/>' +
-        '<h5 class="toppad">' + data.government_program.name + '</h5>' +
-        '<div class="norm">' +
-        '<p class="hyphenate"><a href="' + data.government_program.website + '">' + data.government_program.website + '</a></p>' +
-        '<p class="grey 400 details">' + data.government_program.description + '</p>' +
-        '<img class="h-image " src="' + data.government_program.image + '"/>' +
-        '<div class="edit-del toppad">' +
-        '<h5 class="btn-md" data-toggle="modal" data-target="#editModal">' +
-        '<a href="#">' +
-        '<span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit</a>' +
-        '</h5>' +
-        '<h5 class="btn-md" type="submit" id="delete"><a href="#">' +
-        '<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>' +
-        '</h5>' +
-        '</div></div>'
-      )
-      console.log(data.government_program.description)
-      console.log(data.government_program.image)
-    })
-}
+		//close cart when clicking on the .cd-cart-container::before (bg layer)
+		cartWrapper.on('click', function(event){
+			if( $(event.target).is($(this)) ) toggleCart(true);
+		});
 
-function getData () {
-  $.get(serverURL + 'government-programs')
-    .done(function (data) {
-      data.forEach(function (datum) {
-        if ((datum.logo === '') || (datum.logo === undefined) || (datum.logo === null)) {
-          datum.logo = 'img/default-logo.svg'
-          console.log(datum.logo)
-        }
-        $('#gov').append(
-          '<div id=' + datum._id + ' class="one-item">' +
-          '<img class="logo-all img-circle full-avatar" src="' + datum.logo + '"/>' +
-          '<div class="item-blurb norm">' +
-          '<h6 class="name-all">' + datum.name + '</h6>' +
-          '<p class="hyphenate"><a href="' + datum.website + '">' + datum.website + '</a></p>' +
-          '<p class="address">' + datum.address + '</p>' +
-          '<p class="truncate full grey">' + datum.description + '</p>' +
-          '</div>'
-        )
-      })
-    // console.log(data)
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-    console.log(errorThrown)
-  })
-}
+		//delete an item from the cart
+		cartList.on('click', '.delete-item', function(event){
+			event.preventDefault();
+			removeProduct($(event.target).parents('.product'));
+		});
 
-function addGov (formData) {
-  $.ajax({
-    type: 'POST',
-    url: serverURL + 'government-programs',
-    data: formData,
-    success: function (response) {
-      // then redirect
-      window.location.href = 'govs.html'
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-      // else output error
-      console.log(xhr.status)
-      console.log(thrownError)
-      window.alert('add gov Failed')
-    }
-  })
-}
+		//update item quantity
+		cartList.on('change', 'select', function(event){
+			quickUpdateCart();
+		});
 
-function editGov (formData, newid) {
-  $.ajax({
-    type: 'PUT',
-    url: serverURL + 'government-programs/' + newid,
-    data: formData,
-    success: function (response) {
-      // then redirect
-      window.location.href = 'govs.html'
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-      // else output error
-      console.log(xhr.status)
-      console.log(thrownError)
-      window.alert('edit Gov Program Failed')
-    }
-  })
-}
+		//reinsert item deleted from the cart
+		undo.on('click', 'a', function(event){
+			clearInterval(undoTimeoutId);
+			event.preventDefault();
+			cartList.find('.deleted').addClass('undo-deleted').one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(){
+				$(this).off('webkitAnimationEnd oanimationend msAnimationEnd animationend').removeClass('deleted undo-deleted').removeAttr('style');
+				quickUpdateCart();
+			});
+			undo.removeClass('visible');
+		});
+	}
 
-function deleteGov (newid) {
-  $.ajax({
-    type: 'DELETE',
-    url: serverURL + 'government-programs/' + newid,
-    success: function (response) {
-      // then redirect
-      window.location.href = 'govs.html'
-    },
-    error: function (xhr, ajaxOptions, thrownError) {
-      // else output error
-      console.log(xhr.status)
-      console.log(thrownError)
-      window.alert('delete Gov Program Failed')
-    }
-  })
-}
+	function toggleCart(bool) {
+		var cartIsOpen = ( typeof bool === 'undefined' ) ? cartWrapper.hasClass('cart-open') : bool;
 
-function createMarkers (map) {
-  $.get(serverURL + 'government-programs')
-    .done(function (data) {
-      data.forEach(function (datum) {
-        geocoder = new google.maps.Geocoder()
-        console.log(datum.address, datum.name)
-        geocoder.geocode({'address': datum.address}, function (results, status) {
-          if (status === google.maps.GeocoderStatus.OK) {
-            // In this case it creates a marker, but you can get the lat and lng from the location.LatLng
-            var marker = new google.maps.Marker({
-              map: map,
-              position: results[0].geometry.location
-            // title: datum.name
-            })
-            var contentString = '<div id=' + datum._id + ' class="one-map-item">' +
-              datum.name +
-              '</div>'
-            var infowindow = new google.maps.InfoWindow({
-              content: contentString
-            })
-            marker.addListener('click', function () {
-              if (prevOpenWindow != null) {
-                prevOpenWindow.close()
-              }
-              prevOpenWindow = infowindow
-              infowindow.open(map, marker)
-            })
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status)
-          }
-        })
-      })
-    // console.log(data)
-    }).fail(function (jqXHR, textStatus, errorThrown) {
-    console.log(errorThrown)
-  })
-}
+		if( cartIsOpen ) {
+			cartWrapper.removeClass('cart-open');
+			//reset undo
+			clearInterval(undoTimeoutId);
+			undo.removeClass('visible');
+			cartList.find('.deleted').remove();
 
-var prevOpenWindow = null
+			setTimeout(function(){
+				cartBody.scrollTop(0);
+				//check if cart empty to hide it
+				if( Number(cartCount.find('li').eq(0).text()) == 0) cartWrapper.addClass('empty');
+			}, 500);
+		} else {
+			cartWrapper.addClass('cart-open');
+		}
+	}
 
-function initMap () {
-  var mapDiv = document.getElementById('map')
-  var map = new google.maps.Map(mapDiv, {
-    center: {lat: 1.3521, lng: 103.8198},
-    zoom: 11
-  })
+	function addToCart(trigger) {
+		var cartIsEmpty = cartWrapper.hasClass('empty');
+		//update cart product list
+		addProduct();
+		//update number of items
+		updateCartCount(cartIsEmpty);
+		//update total price
+		updateCartTotal(trigger.data('price'), true);
+		//show cart
+		cartWrapper.removeClass('empty');
+	}
 
-  createMarkers(map)
-}
+	function addProduct() {
+		//this is just a product placeholder
+		//you should insert an item with the selected product info
+		//replace productId, productName, price and url with your real product info
+		productId = productId + 1;
+		var productAdded = $('<li class="product"><div class="product-image"><a href="#0"><img src="img/product-preview.png" alt="placeholder"></a></div><div class="product-details"><h3><a href="#0">Product Name</a></h3><span class="price">$25.99</span><div class="actions"><a href="#0" class="delete-item">Delete</a><div class="quantity"><label for="cd-product-'+ productId +'">Qty</label><span class="select"><select id="cd-product-'+ productId +'" name="quantity"><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option></select></span></div></div></div></li>');
+		cartList.prepend(productAdded);
+	}
+
+	function removeProduct(product) {
+		clearInterval(undoTimeoutId);
+		cartList.find('.deleted').remove();
+
+		var topPosition = product.offset().top - cartBody.children('ul').offset().top ,
+			productQuantity = Number(product.find('.quantity').find('select').val()),
+			productTotPrice = Number(product.find('.price').text().replace('$', '')) * productQuantity;
+
+		product.css('top', topPosition+'px').addClass('deleted');
+
+		//update items count + total price
+		updateCartTotal(productTotPrice, false);
+		updateCartCount(true, -productQuantity);
+		undo.addClass('visible');
+
+		//wait 8sec before completely remove the item
+		undoTimeoutId = setTimeout(function(){
+			undo.removeClass('visible');
+			cartList.find('.deleted').remove();
+		}, 8000);
+	}
+
+	function quickUpdateCart() {
+		var quantity = 0;
+		var price = 0;
+
+		cartList.children('li:not(.deleted)').each(function(){
+			var singleQuantity = Number($(this).find('select').val());
+			quantity = quantity + singleQuantity;
+			price = price + singleQuantity*Number($(this).find('.price').text().replace('$', ''));
+		});
+
+		cartTotal.text(price.toFixed(2));
+		cartCount.find('li').eq(0).text(quantity);
+		cartCount.find('li').eq(1).text(quantity+1);
+	}
+
+	function updateCartCount(emptyCart, quantity) {
+		if( typeof quantity === 'undefined' ) {
+			var actual = Number(cartCount.find('li').eq(0).text()) + 1;
+			var next = actual + 1;
+
+			if( emptyCart ) {
+				cartCount.find('li').eq(0).text(actual);
+				cartCount.find('li').eq(1).text(next);
+			} else {
+				cartCount.addClass('update-count');
+
+				setTimeout(function() {
+					cartCount.find('li').eq(0).text(actual);
+				}, 150);
+
+				setTimeout(function() {
+					cartCount.removeClass('update-count');
+				}, 200);
+
+				setTimeout(function() {
+					cartCount.find('li').eq(1).text(next);
+				}, 230);
+			}
+		} else {
+			var actual = Number(cartCount.find('li').eq(0).text()) + quantity;
+			var next = actual + 1;
+
+			cartCount.find('li').eq(0).text(actual);
+			cartCount.find('li').eq(1).text(next);
+		}
+	}
+
+	function updateCartTotal(price, bool) {
+		bool ? cartTotal.text( (Number(cartTotal.text()) + Number(price)).toFixed(2) )  : cartTotal.text( (Number(cartTotal.text()) - Number(price)).toFixed(2) );
+	}
+});
