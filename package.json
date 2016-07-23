@@ -1,0 +1,25 @@
+{
+  "name": "freeflow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jquery-3.1.0.min.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WillHTam/freeflow.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WillHTam/freeflow/issues"
+  },
+  "homepage": "https://github.com/WillHTam/freeflow#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.9.2"
+  }
+}

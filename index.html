@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>freeflow</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Jquery CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="javascript/user_auth.js"></script>
+  <script src="javascript/about.js"></script>
+  <script src="javascript/index.js"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./style/style.css">
+
+  <!--- Favicon -->
+  <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="./manifest.json">
+
+  <meta name="theme-color" content="#ffffff">
+</head>
+<body class="Site">
+
+  <div class="searchbar mob">
+    <form action="" class="search-form">
+         <div class="has-feedback">
+             <label for="search" class="sr-only norm up">Search Startups SGe</label>
+             <input type="text" class="form-control widekern up norm" name="search" id="search" placeholder="Search Startups SG">
+               <span class="glyphicon glyphicon-search form-control-feedback"></span>
+         </div>
+     </form>
+  </div><!-- searchbox -->
+
+  <div class="container center">
+    <div id="header">
+      <ul class="topuser center">
+        <li id="signup">
+          <a class="topuser-btn" href="register.html">Sign Up</a>
+        </li>
+
+        <li id ="login">
+          <a class="topuser-btn" href="login.html">Log In</a>
+        </li>
+
+        <li id="logout">
+          <a class="topuser-btn" href="#">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <img class="toppad full-logo" src="img/logo.svg"/>
+    <h4 class="title darkgrey">StartUps.SG</h4>
+    <p class="tagline norm darkgreen up">A project for the startup community in Singapore</p>
+  </div>
+
+  <!-- <div class="norm full">
+    <form class="search-form search-full">
+         <div class="has-feedback">
+             <label for="search" class="sr-only norm up">Search Startups SG</label>
+             <input type="text" class="form-control widekern red up" name="search" id="search" placeholder="Search Startups SG">
+               <span class="glyphicon glyphicon-search form-control-feedback"></span>
+         </div>
+     </form>
+  </div> -->
+
+  <!-- ===== START SEARCHBAR =====-->
+  <div class="search">
+
+    <form class="search-form search-full">
+      <div class="has-feedback">
+        <input type="text" class="form-control widekern red up" name="search" id="search-input" placeholder="Search Startups SG"><span class="glyphicon glyphicon-search form-control-feedback"></span>
+      </div>
+    <div id="search-enter"></div>
+  </form>
+  </div>
+  <div class="results" id="search-result">
+    <!-- <ul id="users"></ul> -->
+  </div>
+  <!-- ===== END SEARCHBAR =====-->
+
+  <div class="catbox">
+    <div id="cospace-cat" class="cat">
+        <img class="in-cat mob" src="img/cospace-red.svg">
+        <img class="in-cat full" src="img/cospace-full.svg">
+      <p class="in-cat condense">Co-working <br>Spaces</p>
+    </div>
+
+    <div id="inc-cat" class="cat">
+      <img class="in-cat mob" src="img/inc-red.svg">
+      <img class="in-cat full" src="img/inc-full.svg">
+      <p class="in-cat condense">Incubators &amp;<br>Accelerators</p>
+    </div>
+
+    <div id="event-cat" class="cat">
+      <img class="in-cat mob" src="img/event-red.svg"></p>
+      <img class="in-cat full" src="img/event-full.svg">
+      <p class="in-cat condense">Events &amp;<br>Hackathons<br></p>
+    </div>
+
+    <div id ="govt-cat" class="cat">
+      <img class="in-cat mob" src="img/govt-red.svg"></p>
+      <img class="in-cat full" src="img/govt-full.svg">
+      <p class="in-cat condense">Govt <br>Programmes</p>
+    </div>
+  </div>
+
+  <div class="credits norm Site-content">
+    <div class="container">
+      <p>Startups SG is a community project started by GLEW &copy; 2016. Special credits to Ahn-Minh T Do.</p>
+      <a href="http://snowsandpatrol.github.io/startup-sg-documentation/"><p>Check out the Startups SG API documentation.</p>
+    </div>
+  </div>
+
+  <!-- <div class="navfooter"> -->
+  <div class="mob">
+    <ul class="navfooter">
+      <a src="index.html" href="index.html"><li class="iconbtn home"></li></a>
+      <a src="cospaces.html" href="cospaces.html"><li class="iconbtn cospace"></li></a>
+      <a src="incubators.html" href="incubators.html"><li class="iconbtn inc"></li></a>
+      <a src="events.html" href="events.html"><li class="iconbtn event"></li></a>
+      <a src="programs.html" href="govs.html"><li class="iconbtn govt"></li></a>
+    </ul>
+  </div>
+</body>
+</html>
