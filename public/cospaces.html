@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>freeflow</title>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Javascript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="js/map/map.js"></script>
+  <script src="../javascript/cospaces.js"></script>
+  <script src="../javascript/user_auth.js"></script>
+  <script src="../javascript/about.js"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/map/mapstylesheet.css">
+
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900" rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!--- Favicon -->
+  <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="./manifest.json">
+
+  <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body>
+  <div class="desk-flex">
+    <div class="side-nav full">
+
+      <ul>
+        <li><a href="index.html"><img class="toppad full-logo" src="./logoo.png"/></a></li>
+
+        <a href="cospaces.html"><li class="grey hover-nav  align-nav">Coworking Spaces</li></a>
+
+        <a class="hover-nav" href="incubators.html"><li class="grey hover-nav align-nav">Incubators &amp; Accelerators</li></a>
+
+        <a href="events.html"><li class="grey hover-nav align-nav">Events &amp; Hackathons</li></a>
+
+        <a href="govs.html"><li class="grey hover-nav align-nav">Government Programs</li></a>
+
+        <a href="investors.html"><li class="grey hover-nav align-nav">Investors</li></a>
+
+        <li class="align-nav2">
+          <button id="signup">
+            <a class="topuser-btn" href="register.html">Sign Up</a>
+          </button>
+
+          <button id ="login">
+            <a class="topuser-btn" href="login.html">Log In</a>
+          </button>
+
+          <button id="logout">
+            Logout
+          </button>
+        </li>
+      </ul>
+
+      <!-- DESKVIEW BUTTON FOR ADD ENTRY -->
+      <div class="add full" data-toggle="modal" data-target="#addModal">
+        <a href="#">
+        <h5><span class="" aria-hidden="true"></span> Order</h5>
+        </a>
+      </div>
+    </div><!--side-nav-->
+
+    <div class="main-content">
+      <div class="container center">
+        <button class=""><span class="" aria-hidden="true"></span></button>
+
+      <div id="header">
+        <a href="index.html"><img class="toppad full-logo" src="./logoo.png"/></a>
+        <h4 class="title darkgrey">FREE FLOW</h4>
+        <p class="tagline condense">A CUP A DAY, BUT DIFFERENT.</p>
+
+      </div><!--header-->
+
+      </div><!--container-->
+
+      <!-- ===== MAP COWORKING SPACES =====-->
+      <div id="map"></div>
+
+        <!-- ===== SHOW ALL COWORKING SPACES ===== -->
+        <div id="cospace" class="info"></div>
+
+        <!-- ===== SHOW INDIVIDUAL COWORKING SPACES ===== -->
+        <div id='cospace-show'>
+          <div class="close-btn"><a href="cospaces.html"></a>
+          </div>
+          <div class="center toppad">
+            <div id=' + data.cospace._id + '>
+
+        <!-- <img class="logo-all img-circle" src=""/> -->
+        <h4 class="toppad">Eskimo Cafe</h4>
+        <div class="norm">
+        <!-- <p class="hyphenate"><a href="''">'</a></p> -->
+        <p class="toppad address">Forum Central Library Building 119260, 12 Kent Ridge Cres, 119275</p>
+        <p class="grey 400 details">The Grilled Chicken Chop was pretty much what I would never eat but settled for it because I was too hungry to settle for their sides. They usually served it with fries but because I went to the café at around 4 plus and they have sold out their fries so it was served with rice instead.</p>
+        <img class="h-image" src="./eskimo.jpg">
+        </div>
+
+        <!-- <img class="logo-all img-circle" src="''"/> -->
+        <h4 class="toppad">Humble Origins</h4>
+        <div class="norm">
+        <!-- <p class="hyphenate">address<a href="''">'</a></p> -->
+        <p class="toppad address">NUS Kent Ridge Drive Faculty of Arts and Social Sciences (Next to LT12)</p>
+        <p class="grey 400 details">Humble Origins has been featured on The Ridge!
+We'll remain open during Examinations Week and the semester break! Come by between 8.30am to 4.30pm on weekdays if you miss our delicious coffee and addictive pastries!</p>
+        <img class="h-image" src="./humble.jpg">
+        </div>
+
+        <!-- <img class="logo-all img-circle" src="''"/> -->
+        <h4 class="toppad">NUS Sado Club</h4>
+        <div class="norm">
+        <!-- <p class="hyphenate">address<a href="''">'</a></p> -->
+        <p class="toppad address">9 Arts Link, 117572</p>
+        <p class="grey 400 details">The NUS Sado Club is a student interest group that was established since 30 September 1989, under the NUS Department of Japanese Studies. The club practises the traditional Japanese tea ceremony in the Enshuryu style, and gives members the opportunity to experience and learn Japanese culture, while immersing themselves in “和(harmony), 敬(respect), 清(purity), 寂(serenity)”, the philosophy of Sado.</p>
+        <img class="h-image" src="./sado.jpg">
+        </div>
+
+        <!-- <img class="logo-all img-circle" src="''"/> -->
+        <h4 class="toppad">Waa Cow</h4>
+        <div class="norm">
+        <!-- <p class="hyphenate">address<a href="''">'</a></p> -->
+        <p class="toppad address">11 Kent Ridge Drive, Singapore 119244 (Kent Ridge MRT)</p>
+        <p class="grey 400 details">The Grilled Chicken Chop was pretty much what I would never eat but settled for it because I was too hungry to settle for their sides. They usually served it with fries but because I went to the café at around 4 plus and they have sold out their fries so it was served with rice instead.</p>
+        <img class="h-image" src="./waacow.jpg">
+        </div>
+
+        <!-- ===== ADD COWORKING SPACE ===== -->
+        <!-- Modal -->
+        <div class="modal fade" id="addModal" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title toppad center">Add a Co-Working Space</h5>
+              </div>
+
+              <div class="modal-body">
+                <form id="add-cospace-form">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="name">
+                  </div>
+                  <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" name="address">
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea type="text" class="form-control" rows="3" id="description" name="description"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Website</label>
+                    <input type="text" class="form-control" name="website">
+                  </div>
+                  <div class="form-group">
+                    <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Logo Image URL</label>
+                    <input type="text" class="form-control" name="url">
+                  </div>
+                  <div class="form-group">
+                    <label><span class="glyphicon glyphicon-camera" aria-hidden="true"></span>Additional Image URL</label>
+                    <input type="text" class="form-control" name="url">
+                  </div>
+                  <br>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-md formbutton"><h5>Submit</h5></button>
+                  </div>
+                </form>
+              </div><!--modal-body-->
+            </div><!--modal-content-->
+          </div><!--modal-dialog-->
+        </div><!--modal-->
+
+
+      <!-- ===== EDIT COWORKING SPACE ===== -->
+      <!-- Modal -->
+      <div class="modal fade" id="editModal" role="dialog">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  &times;
+                </button>
+                <h4 class="modal-title center toppad">Edit Details</h4>
+              </div>
+              <div class="modal-body">
+                <form id="edit-cospace-form">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="name">
+                  </div>
+                  <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" class="form-control" name="address">
+                  </div>
+                  <div class="form-group">
+                    <label>Description</label>
+                    <textarea type="text" class="form-control" rows="3" id="description" name="description"></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Website</label>
+                    <input type="text" class="form-control" name="website">
+                  </div>
+
+                  <div class="form-group">
+                    <label><span class="glyphicon glyphicon-user" aria-hidden="true"></span>Logo Image URL</label>
+                    <input type="text" class="form-control" name="url">
+                  </div>
+
+                  <div class="form-group">
+                    <label>
+                      <span class="glyphicon glyphicon-camera" aria-hidden="true"></span>Header Image URL
+                    </label>
+                    <input type="text" class="form-control" name="url">
+                  </div>
+
+                  <br>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-md formbutton">
+                      <h5>Submit</h5>
+                    </button>
+                  </div>
+
+                </form>
+
+              </div><!-- modal-body -->
+            </div><!-- modal-content -->
+          </div><!-- modal-dialog modal-lg -->
+        </div><!-- modal-fade -->
+
+    </div><!--main-content-->
+  </div> <!-- desk-flex -->
+
+  <!-- MOBILE BUTTON FOR ADD ENTRY -->
+  <div class="add mob">
+    <a href="./govs.html">
+    <h5><span class="glyphicon glyphicon-plus-sign red" aria-hidden="true"></span>Order Now</h5>
+    </a>
+  </div><!--add btn-->
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVfD1Z4hserqiO83dg0ZOOexyCepCCg6w&libraries=places&callback=initMap" async defer></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </body>
+</html>
