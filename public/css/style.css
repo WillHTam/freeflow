@@ -801,3 +801,8 @@ label {
   /*border: 1px #1bedd4; solid;*/
     background-color: #e6e7e8;
 }
+
+hr {
+  border: 1px #1bedd4 solid;
+  transform: scaleY(0.5);
+}
