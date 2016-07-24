@@ -116,7 +116,7 @@ li {
 
 a {
   text-decoration: none;
-  color: #26b6a5;
+  color: black;
 }
 
 a:hover {
@@ -800,4 +800,9 @@ label {
 #events-past li {
   /*border: 1px #1bedd4; solid;*/
     background-color: #e6e7e8;
+}
+
+hr {
+  border: 1px #1bedd4 solid;
+  transform: scaleY(0.5);
 }
